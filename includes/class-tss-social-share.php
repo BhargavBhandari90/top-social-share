@@ -63,7 +63,6 @@ class TSS_Social_Share{
 			$tss_color_option = 'style="color: ' . $options['tss_field_icon_style_foreground_color'] . '; background-color: ' . $options['tss_field_icon_style_bg_color'] . ';"';
 		}
 
-
 		//Size
 		if ( $options['tss_field_icon_size'] === 'medium' ) {
 			$tss_size_option = 'fa-2x';
@@ -73,19 +72,11 @@ class TSS_Social_Share{
 			$tss_size_option = '';
 		}
 		$html = '<div class="tss-social-div"><ul>';
-			global $post;
-			$post_permalink = get_permalink( $post->ID );
-			$post_title = $post->ID;
-			$post_attachment_url = wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) );
-
-			$fb_link = 'href="http://www.facebook.com/sharer.php?u=' . $post_permalink . '" target="_blank"';
-			$tw_link = 'href="https://twitter.com/intent/tweet?url=' . $post_permalink . '" target="_blank"';
-			$go_link = 'href="https://plus.google.com/share?url=' . $post_permalink . '" target="_blank"';
-			$pi_link = 'data-pin-do="buttonPin" data-pin-count="above" href="https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fakgoods.com&media=' . $post_attachment_url . '&description=Check%20this%20out!" target="_blank"';
-			$li_link = 'href="https://www.linkedin.com/shareArticle?mini=true&url=' . $post_permalink . '&title=' . $post_title . '" target="_blank"';
-			$wa_link = 'href="whatsapp://send?text=' . $post_permalink . '" data-action="share/whatsapp/share" target="_blank"';
-
-			$tss_social_buttons = tss_social_sharing_options();
+		global $post;
+		$post_permalink = get_permalink( $post->ID );
+		$post_title = $post->ID;
+		$post_attachment_url = wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) );
+		$tss_social_buttons = tss_social_sharing_options();
 		if ( array_key_exists( 'tss_social_icon_order_1', $options ) ) {
 			// load reorderd options
 			for( $tss_icon = 0; $tss_icon < 4; $tss_icon++ ){
