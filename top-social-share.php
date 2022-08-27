@@ -46,6 +46,5 @@ if( !function_exists( 'tss_plugin_activate' ) ){
 		require_once( TSS_PLUGINS_PATH . 'includes/class-tss-settings.php' );
 		require_once( TSS_PLUGINS_PATH . 'includes/class-tss-social-share.php' );
 	}
-	// register_activation_hook( __FILE__, 'tss_plugin_activate' );
 	add_action( 'plugins_loaded', 'tss_plugin_activate' );
 }
