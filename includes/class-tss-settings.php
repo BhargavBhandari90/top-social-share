@@ -49,6 +49,7 @@ class TSS_Settings{
 		wp_enqueue_style( 'wp-color-picker' );
 		// wp_enqueue_style( "jquery-ui-sortable" );
 		wp_enqueue_script( 'tss-script-handle', TSS_PLUGINS_URL.'assets/js/scripts.js', array( 'wp-color-picker', 'jquery-ui-sortable' ), false, true );
+		wp_enqueue_style( 'tss-admin-style-handle', TSS_PLUGINS_URL.'assets/css/admin-style.css', array(), TSS_PLUGINS_VERSION );
 	}
 
 	/**

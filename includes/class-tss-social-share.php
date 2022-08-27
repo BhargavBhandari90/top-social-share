@@ -34,6 +34,14 @@ class TSS_Social_Share{
 		add_action( 'wp_footer', array( $this, 'tss_display_social_left' ) );
 		add_filter( 'the_content', array( $this, 'add_tss_social_icons_placement' ) );
 		add_filter( 'post_thumbnail_html', array( $this, 'add_tss_social_icons_inside_featured_image' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'tss_enqueue_script' ) );
+	}
+
+	/**
+	 *  Add share bar style.
+	 */
+	function tss_enqueue_script(){
+		wp_enqueue_style( 'tss-style-handle', TSS_PLUGINS_URL.'assets/css/style.css', array(), TSS_PLUGINS_VERSION );
 	}
 
 	/**

@@ -31,9 +31,13 @@ defined( 'ABSPATH' ) || exit;
 if ( ! defined( 'TSS_PLUGINS_URL' ) ) {
 	define( 'TSS_PLUGINS_URL',  plugin_dir_url( __FILE__ ) );
 }
-
+// Define plugin path.
 if ( ! defined( 'TSS_PLUGINS_PATH' ) ) {
 	define( 'TSS_PLUGINS_PATH',  plugin_dir_path( __FILE__ ) );
+}
+// Define plugin version.
+if ( ! defined( 'TSS_PLUGINS_VERSION' ) ) {
+	define( 'TSS_PLUGINS_VERSION', '1.0.0' );
 }
 
 /**
