@@ -1,0 +1,47 @@
+/* Default share bar style */
+.tss-social-div ul{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	display:flex;
+	flex-wrap:wrap;
+	align-content:center;
+	justify-content:flex-start;
+}
+.tss-social-div ul li{
+	margin:0 5px 5px 0;
+}
+
+.tss-featured-image-overlay .tss-social-div{
+	margin-top:10px;
+}
+
+/* Floating share bar style */
+.tss-share-floating-bar{
+	position:fixed;
+	top:50%;
+	left:0px;
+	padding:10px;
+	background:#fff;
+	border-radius:0 5px 5px 0;
+	box-shadow:0 0 15px rgb(0 0 0 / 10%);
+}
+.tss-share-floating-bar .tss-social-div ul{
+	display:block;
+}
+
+/* Image large size */
+.tss-social-div ul li.tss-size-3x svg{
+	width:48px;
+	height:48px;
+}
+/* Image medium size */
+.tss-social-div ul li.tss-size-2x svg{
+	width:32px;
+	height:32px;
+}
+
+.tss-social-div ul li svg{
+	width:24px;
+	height:24px;
+}

@@ -56,22 +56,26 @@ class TSS_Social_Share{
 
 		$options = get_option( 'tss_options' );
 
-		//Color option
-		if ( $options['tss_field_button_colors'] === 'default' ) {
-			$tss_color_option = '';
-		} else {
-			$tss_color_option = 'style="color: ' . $options['tss_field_icon_style_foreground_color'] . '; background-color: ' . $options['tss_field_icon_style_bg_color'] . ';"';
+		// background color.
+		$additional_icon_color_style = '';
+		if( !empty( $options['tss_field_icon_style'] ) && 'custom' === $options['tss_field_icon_style'] ){
+			$additional_icon_color_style .= '.tss-social-div svg{  background-color: '.$options['tss_field_icon_style_bg_color'] .' !important; }';
 		}
-
+		// Foreground color.
+		$fore_color = '';
+		if( !empty( $options['tss_field_icon_style_foreground'] ) && 'custom' === $options['tss_field_icon_style_foreground'] ){
+			$fore_color = $options['tss_field_icon_style_foreground_color'];
+			$additional_icon_color_style .= '.tss-social-div svg path{  fill:'.$options['tss_field_icon_style_foreground_color'] .' !important; }';
+		}
 		//Size
 		if ( $options['tss_field_icon_size'] === 'medium' ) {
-			$tss_size_option = 'fa-2x';
+			$tss_size_option = 'tss-size-2x';
 		} elseif ( $options['tss_field_icon_size'] === 'large' ) {
-			$tss_size_option = 'fa-3x';
+			$tss_size_option = 'tss-size-3x';
 		} else {
 			$tss_size_option = '';
 		}
-		$html = '<div class="tss-social-div"><ul>';
+		$html = '<div class="tss-social-div"><style>' . $additional_icon_color_style . '</style><ul>';
 		global $post;
 		$post_permalink = get_permalink( $post->ID );
 		$post_title = $post->ID;
@@ -79,14 +83,14 @@ class TSS_Social_Share{
 		$tss_social_buttons = tss_social_sharing_options();
 		if ( array_key_exists( 'tss_social_icon_order_1', $options ) ) {
 			// load reorderd options
-			for( $tss_icon = 0; $tss_icon < 4; $tss_icon++ ){
+			for( $tss_icon = 0; $tss_icon < count( $tss_social_buttons ); $tss_icon++ ){
 				if ( array_key_exists( 'tss_social_icon_order_'.$tss_icon, $options ) ) {
 					$tss_social_icon = $options[ 'tss_social_icon_order_'. $tss_icon ];
 					if( !empty( $tss_social_buttons[$tss_social_icon] ) ){
 						$share_btn_link = $this->tss_social_share_link( $tss_social_icon );
 						if ( array_key_exists( 'tss_field_share_buttons_'.$tss_social_icon, $options ) && !empty( $share_btn_link ) ) {
-							$img = !empty( $tss_social_buttons[$tss_social_icon]['img'] ) ? '<img src="'. esc_url( $tss_social_buttons[$tss_social_icon]['img'] ).'" width="24px" height="24px" style="background-color:'. esc_attr( $tss_social_buttons[$tss_social_icon]['bgcolor'] ) .'" />' : esc_attr( $tss_social_buttons[$tss_social_icon]['label'] );
-							$html .= '<li data-tss-icon-name="'. esc_attr( $tss_social_icon ) .'"><a '. $share_btn_link.' >' . $img .'</a></li>';
+							$img = !empty( $tss_social_buttons[$tss_social_icon]['img'] ) ? $tss_social_buttons[$tss_social_icon]['img'] : esc_attr( $tss_social_buttons[$tss_social_icon]['label'] );
+							$html .= '<li data-tss-icon-name="'. esc_attr( $tss_social_icon ) .'" class="' . $tss_size_option . '"><a '. $share_btn_link.' >' . $img .'</a></li>';
 						}
 					}
 				}
@@ -96,7 +100,7 @@ class TSS_Social_Share{
 			foreach( $tss_social_buttons as $button_slug => $tss_social_button ){
 				$share_btn_link = $this->tss_social_share_link( $button_slug );
 				if ( array_key_exists( 'tss_field_share_buttons_'.$button_slug, $options ) && !empty( $share_btn_link ) ) {
-					$img = !empty( $tss_social_button['img'] ) ? '<img src="'. esc_url( $tss_social_button['img'] ).'" width="24px" height="24px" style="background-color:'. esc_attr( $tss_social_button['bgcolor'] ) .'" />' : '';
+					$img = !empty( $tss_social_button['img'] ) ? $tss_social_buttons[$tss_social_icon]['img'] : esc_attr( $tss_social_buttons[$tss_social_icon]['label'] );
 					$html .= '<li data-tss-icon-name="'. esc_attr( $button_slug ) .'"><a '. $share_btn_link.' >' . $img .'</a></li>';
 				}
 			}
@@ -174,7 +178,7 @@ class TSS_Social_Share{
 				break;
 			case 'whatsapp':
 				if ( wp_is_mobile() ) {
-					$link = 'href="whatsapp://send?text=' . $post_permalink . '" data-action="share/whatsapp/share" target="_blank"';'href="whatsapp://send?text=' . $post_permalink . '" data-action="share/whatsapp/share" target="_blank"';
+					$link = 'href="https://api.whatsapp.com/send?text=' . $post_permalink . '" data-action="share/whatsapp/share" target="_blank"';
 				} //end wp_is_mobile
 		} // end switch
 		return $link;

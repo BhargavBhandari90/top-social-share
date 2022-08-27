@@ -2,17 +2,15 @@ jQuery(document).ready(function(){
     // Add color picker.
     jQuery('.tss-style-container .color-field').wpColorPicker();
 
-    function show_color_picker_for_custom(arg_1){
+	/**
+	 * Function to show color picker field for custom style selection only.
+	 */
+    function show_color_picker_for_custom(){
         var $this = jQuery(this);
         var $colorFieldParent = $this.parent().next('div').first();
 
         if ('custom' === $this.val()) {
-            // If first argument is a number, indicating $.each() is the caller
-            if (typeof arg_1 === 'number') {
-                $colorFieldParent.fadeIn('fast');
-            } else {
-                $colorFieldParent.slideDown('fast');
-            }
+			$colorFieldParent.slideDown('fast');
         } else {
             $colorFieldParent.hide();
         }
@@ -38,10 +36,10 @@ jQuery(document).ready(function(){
     jQuery('#tss-social-icon-sortable').sortable({
         forcePlaceholderSize: true,
         placeholder: 'ui-sortable-placeholder',
-        opacity: .6,
+        opacity: 0.6,
         tolerance: 'pointer',
         update: function(){
-            to_input(this)
+            to_input(this);
         }
     });
 

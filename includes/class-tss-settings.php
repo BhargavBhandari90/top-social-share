@@ -117,7 +117,6 @@ class TSS_Settings{
 			'tss_field_share_buttons_pinterest'              => '1',
 			'tss_field_share_buttons_whatsapp'               => '1',
 			'tss_field_icon_size'                            => 'small',
-			'tss_field_icon_style_size'                      => '32',
 			'tss_field_icon_style_bg_color'                  => '#000000',
 			'tss_field_icon_style'                           => 'original',
 			'tss_field_icon_style_foreground'                => 'original',
@@ -274,11 +273,11 @@ class TSS_Settings{
 				$tss_social_buttons = tss_social_sharing_options();
 				if ( array_key_exists( 'tss_social_icon_order_1', $options ) ) {
 					// load reorderd options
-					for( $tss_icon = 0; $tss_icon < 4; $tss_icon++ ){
+					for( $tss_icon = 0; $tss_icon <= count( $tss_social_buttons ); $tss_icon++ ){
 						if ( array_key_exists( 'tss_social_icon_order_'.$tss_icon, $options ) ) {
 							$tss_social_icon = $options[ 'tss_social_icon_order_'. $tss_icon ];
 							if( !empty( $tss_social_buttons[$tss_social_icon] ) ){
-								$img = !empty( $tss_social_buttons[$tss_social_icon]['img'] ) ? '<img src="'. esc_url( $tss_social_buttons[$tss_social_icon]['img'] ).'" width="24px" height="24px" style="background-color:'. esc_attr( $tss_social_buttons[$tss_social_icon]['bgcolor'] ) .'" />' : '';
+								$img = !empty( $tss_social_buttons[$tss_social_icon]['img_url'] ) ? '<img src="'. esc_url( $tss_social_buttons[$tss_social_icon]['img_url'] ).'" width="24px" height="24px" style="background-color:'. esc_attr( $tss_social_buttons[$tss_social_icon]['bgcolor'] ) .'" />' : '';
 								echo '<li data-tss-icon-name="'. esc_attr( $tss_social_icon ) .'"><label><input type="checkbox" name="tss_options[tss_field_share_buttons_'. esc_attr( $tss_social_icon ) .']" ' . checked( $options[ 'tss_field_share_buttons_' . $tss_social_icon ], 1, false ) . ' value="1"> ' . $img . esc_attr( $tss_social_buttons[$tss_social_icon]['label'] ).'</label></li>';
 							}
 						}
@@ -286,14 +285,14 @@ class TSS_Settings{
 				} else{
 					// load default options
 					foreach( $tss_social_buttons as $button_slug => $tss_social_button ){
-						$img = !empty( $tss_social_button['img'] ) ? '<img src="'. esc_url( $tss_social_button['img'] ).'" width="24px" height="24px" style="background-color:'. esc_attr( $tss_social_button['bgcolor'] ) .'" />' : '';
+						$img = !empty( $tss_social_button['img_url'] ) ? '<img src="'. esc_url( $tss_social_button['img_url'] ).'" width="24px" height="24px" style="background-color:'. esc_attr( $tss_social_button['bgcolor'] ) .'" />' : '';
 						echo '<li data-tss-icon-name="'. esc_attr( $button_slug ) .'"><label><input type="checkbox" name="tss_options[tss_field_share_buttons_'. esc_attr( $button_slug ) .']"  ' . checked( $options[ 'tss_field_share_buttons_' . $button_slug ], 1, false ) . ' value="1"> ' . $img . esc_attr( $tss_social_button['label'] ).'</label></li>';
 					}
 				}
 				?>
 			</ul>
 			<?php
-			for( $tss_icon = 0; $tss_icon < 4; $tss_icon++ ){
+			for( $tss_icon = 0; $tss_icon <= count( $tss_social_buttons ); $tss_icon++ ){
 				if ( array_key_exists( 'tss_social_icon_order_'.$tss_icon, $options ) ) {
 					echo '<input class="tss_hidden_options" name="tss_options[tss_social_icon_order_' . $tss_icon . ']" type="hidden" value="'. $options[ 'tss_social_icon_order_'. $tss_icon ] .'">';
 				}
@@ -363,7 +362,6 @@ class TSS_Settings{
 		<div class="wrap tss-style-container">
 			<small><?php _e( 'Select size for sharing icons', 'social-share-top-tal' ); ?></small>
 			<ul>
-				<li><label><input class="small-text" name="tss_options[<?= esc_attr( $args['label_for'] ).'_size'; ?>]" type="number" max="300" min="10" maxlength="3" step="2" oninput="if(this.value.length > 3) this.value=this.value.slice(0, 3)" placeholder="32" value="<?php echo ! empty( $options['tss_field_icon_style_size'] ) ? esc_attr( $options['tss_field_icon_style_size'] ) : '32'; ?>"> pixels</label></li>
 				<li>
 					<label>
 						<select class="tss_icon_color"  name="tss_options[<?= esc_attr( $args['label_for'] ); ?>]">

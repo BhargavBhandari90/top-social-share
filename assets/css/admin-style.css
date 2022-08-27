@@ -1,0 +1,30 @@
+
+/* Plugin setting page fields style */
+.sharing-icons-lists.ui-sortable{
+	display:flex;
+	flex-wrap:wrap;
+	align-items:center;
+}
+.sharing-icons-lists.ui-sortable li{
+	margin-right:10px;
+	cursor: move;
+}
+.sharing-icons-lists.ui-sortable li label{
+	display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+	position:relative;
+	cursor: move;
+}
+.sharing-icons-lists.ui-sortable li label img{
+	margin:5px 10px;
+}
+.sharing-icons-lists.ui-sortable li label input[type="checkbox"]{
+	margin:0px;
+}
+
+.tss-style-container .color-field-container{
+	margin-top:5px;
+}
