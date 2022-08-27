@@ -428,7 +428,7 @@ class TSS_Settings{
 						data-custom="<?= esc_attr( $args['tss_custom_data'] ); ?>"
 						name="tss_options[<?= esc_attr( $args['label_for'] . '_floating_left' ); ?>]"
 						value="1" <?php checked( 1, $floating_left, true ); ?>/>
-					<label for="<?= esc_attr( $args['label_for'] . '_floating_left' ); ?>"><?= esc_html( 'Floating Left', 'tss' ); ?></label>
+					<label for="<?= esc_attr( $args['label_for'] . '_floating_left' ); ?>"><?= esc_html( 'Floating Left (will display on every page, regardless of post type selection above)', 'tss' ); ?></label>
 				</li>
 				<li>
 					<input type="checkbox" id="<?= esc_attr( $args['label_for'] . '_below_post_title' ); ?>"
