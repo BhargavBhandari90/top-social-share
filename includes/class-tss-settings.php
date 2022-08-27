@@ -234,7 +234,7 @@ class TSS_Settings{
 	public function tss_field_post_types_cb( $args ) {
 		// Get the value of the setting we've registered with register_setting()
 		$options = get_option( 'tss_options' );
-		var_dump($options);
+		// var_dump($options);
 		$public_post_types = get_post_types( array( "public" => true ) );
 
 

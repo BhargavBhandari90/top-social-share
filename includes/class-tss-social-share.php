@@ -113,7 +113,7 @@ class TSS_Social_Share{
 		$options = get_option( 'tss_options' );
 		$display_left = array_key_exists( 'tss_field_icon_placement_floating_left', $options );
 		if ( $display_left ) {
-			echo $this->build_the_tss_icons();
+			echo '<div class="tss-share-floating-bar">' .$this->build_the_tss_icons() . '</div>';
 		}
 	}
 
