@@ -1,6 +1,8 @@
 <?php
 /**
  * File called when Top Social Share plugin is uninstalled.
+ *
+ * @package TSS
  */
 
 // if uninstall.php is not called by WordPress, die.

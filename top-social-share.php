@@ -9,7 +9,7 @@
  *
  * @link              http://naveengiri.com
  * @since             1.0.0
- * @package           Top Social Share
+ * @package           TSS
  *
  * @wordpress-plugin
  * Plugin Name:     Top Social Share

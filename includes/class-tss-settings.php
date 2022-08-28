@@ -20,7 +20,11 @@ defined( 'ABSPATH' ) || exit;
 class TSS_Settings{
 
 	/**
+	 * Plugin settings data array.
 	 *
+	 * @access  private
+	 *
+	 * @var Array  $tss_option settings array
 	 */
 	private $tss_option;
 
@@ -35,7 +39,7 @@ class TSS_Settings{
 	 * Load settings files.
 	 */
 	public function load(){
-
+		// get the setting data array.
 		$this->tss_option = get_option( 'tss_options' );
 		/**
 		 * Register tss_options_page to the admin_menu action hook
@@ -220,8 +224,9 @@ class TSS_Settings{
 	} //end tss_settings_init
 
 	/**
-	 * Intro section cb
+	 * Intro section for shortcode
 	 *
+	 * @param Array $args setting field data
 	 */
 	public function tss_intro_section_cb( $args ) {
 		?>
@@ -234,7 +239,7 @@ class TSS_Settings{
 	 *
 	 * Input type: checkboxes
 	 *
-	 * @param $args
+	 * @param $args setting field data
 	 */
 	public function tss_field_post_types_cb( $args ) {
 		// Get the value of the setting we've registered with register_setting()
@@ -261,7 +266,7 @@ class TSS_Settings{
 	/**
 	 * Share buttons
 	 *
-	 * @param $args
+	 * @param $args setting field data
 	 */
 	public function tss_field_share_buttons_cb( $args ) {
 
@@ -305,6 +310,11 @@ class TSS_Settings{
 		echo ob_get_clean();
 	}
 
+	/**
+	 * Add icons size options html
+	 *
+	 * @param $args setting field data
+	 */
 	public function tss_field_icon_size_cb( $args ){
 		ob_start();
 		?>
@@ -313,7 +323,7 @@ class TSS_Settings{
 			<?php
 
 			if ( array_key_exists( 'tss_field_icon_size', $this->tss_option ) ) {
-				$is_checked = $this->tss_option['tss_field_icon_size'];
+				$is_checked = esc_attr( $this->tss_option['tss_field_icon_size'] );
 			} else {
 				$is_checked = '';
 			}
@@ -346,15 +356,20 @@ class TSS_Settings{
 		echo ob_get_clean();
 	}
 
+	/**
+	 * Add options to change colors or social share icons globally.
+	 *
+	 * @param $args setting field data
+	 */
 	public function tss_field_icon_style_cb( $args ){
 		ob_start();
 		if ( array_key_exists( 'tss_field_icon_style', $this->tss_option ) ) {
-			$tss_field_icon_style = $this->tss_option['tss_field_icon_style'];
+			$tss_field_icon_style = esc_attr( $this->tss_option['tss_field_icon_style'] );
 		} else {
 			$tss_field_icon_style = '';
 		}
 		if ( array_key_exists( 'tss_field_icon_style_foreground', $this->tss_option ) ) {
-			$tss_field_icon_foreground_style = $this->tss_option['tss_field_icon_style_foreground'];
+			$tss_field_icon_foreground_style = esc_attr( $this->tss_option['tss_field_icon_style_foreground'] );
 		} else {
 			$tss_field_icon_foreground_style = '';
 		}
@@ -388,6 +403,11 @@ class TSS_Settings{
 		echo ob_get_clean();
 	}
 
+	/**
+	 * Add options for social icons placements
+	 *
+	 * @param $args setting field data
+	 */
 	public function tss_field_icon_placement_cb( $args ){
 		ob_start();
 		?>
@@ -396,25 +416,25 @@ class TSS_Settings{
 			<?php
 
 			if ( array_key_exists( 'tss_field_icon_placement_below_post_title', $this->tss_option ) ) {
-				$below_post_title = $this->tss_option['tss_field_icon_placement_below_post_title'];
+				$below_post_title = esc_attr( $this->tss_option['tss_field_icon_placement_below_post_title'] );
 			} else {
 				$below_post_title = '';
 			}
 
 			if ( array_key_exists( 'tss_field_icon_placement_floating_left', $this->tss_option ) ) {
-				$floating_left = $this->tss_option['tss_field_icon_placement_floating_left'];
+				$floating_left = esc_attr( $this->tss_option['tss_field_icon_placement_floating_left'] );
 			} else {
 				$floating_left = '';
 			}
 
 			if ( array_key_exists( 'tss_field_icon_placement_after_post_content', $this->tss_option ) ) {
-				$after_post_content = $this->tss_option['tss_field_icon_placement_after_post_content'];
+				$after_post_content = esc_attr( $this->tss_option['tss_field_icon_placement_after_post_content'] );
 			} else {
 				$after_post_content = '';
 			}
 
 			if ( array_key_exists( 'tss_field_icon_placement_inside_feature_image', $this->tss_option ) ) {
-				$inside_feature_image = $this->tss_option['tss_field_icon_placement_inside_feature_image'];
+				$inside_feature_image = esc_attr( $this->tss_option['tss_field_icon_placement_inside_feature_image'] );
 			} else {
 				$inside_feature_image = '';
 			}

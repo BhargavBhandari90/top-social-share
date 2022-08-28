@@ -16,6 +16,12 @@ jQuery(document).ready(function(){
         }
     }
 
+	/**
+	 * Function used to track and handle sorted social options.
+	 *
+	 * this function creates hidden field to track reordered item lists.
+	 *
+	 */
     var to_input = function(this_sortable){
         // Clear any previous hidden inputs for storing chosen services
         // and special service options
