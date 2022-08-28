@@ -57,21 +57,3 @@ if ( ! function_exists( 'tss_social_sharing_options' ) ) {
 
 	}
 }
-if ( !function_exists( 'tss_share_shortcode' ) ) {
-	// Add shortcode here.
-	add_shortcode( 'top-share', 'tss_share_shortcode' );
-	/**
-	 * Add shortcode to add share bar.
-	 *
-	 * @param Array $atts shortcode attributes
-	 * @return string $html social share bar
-	 */
-	function tss_share_shortcode( $atts ) {
-		$instance = new TSS_Social_Share();
-		$html = '<div class="tss-share-shortcode-output">';
-			$html .= $instance->build_the_tss_icons();
-		$html .= '</div>';
-
-		return $html;
-	}
-}

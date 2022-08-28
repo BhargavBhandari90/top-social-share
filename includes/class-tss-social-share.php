@@ -35,6 +35,8 @@ class TSS_Social_Share{
 		add_filter( 'the_content', array( $this, 'add_tss_social_icons_placement' ) );
 		add_filter( 'post_thumbnail_html', array( $this, 'add_tss_social_icons_inside_featured_image' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tss_enqueue_script' ) );
+		// Add shortcode here.
+		add_shortcode( 'top-share', array( $this, 'tss_share_shortcode' ) );
 	}
 
 	/**
@@ -182,6 +184,21 @@ class TSS_Social_Share{
 				} //end wp_is_mobile
 		} // end switch
 		return $link;
+	}
+
+	/**
+	 * Add shortcode to add share bar.
+	 *
+	 * @param Array $atts shortcode attributes
+	 * @return string $html social share bar
+	 */
+	function tss_share_shortcode( $atts ) {
+		$instance = new TSS_Social_Share();
+		$html = '<div class="tss-share-shortcode-output">';
+			$html .= $instance->build_the_tss_icons();
+		$html .= '</div>';
+
+		return $html;
 	}
 }
 $instance = new TSS_Social_Share();

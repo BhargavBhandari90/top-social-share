@@ -46,8 +46,11 @@ if ( ! defined( 'TSS_PLUGINS_VERSION' ) ) {
 if( !function_exists( 'tss_plugin_activate' ) ){
 	function tss_plugin_activate() {
 		// include all required files here.
-		require_once( TSS_PLUGINS_PATH . 'includes/class-tss-settings.php' );
-		require_once( TSS_PLUGINS_PATH . 'includes/class-tss-social-share.php' );
+		if ( is_admin() ){
+			require_once( TSS_PLUGINS_PATH . 'includes/class-tss-settings.php' );
+		} else{
+			require_once( TSS_PLUGINS_PATH . 'includes/class-tss-social-share.php' );
+		}
 		require_once( TSS_PLUGINS_PATH . 'includes/functions.php' );
 	}
 	add_action( 'plugins_loaded', 'tss_plugin_activate' );
