@@ -58,12 +58,12 @@ class TSS_Social_Share{
 
 		// background color.
 		$additional_icon_color_style = '';
-		if( !empty( $options['tss_field_icon_style'] ) && 'custom' === $options['tss_field_icon_style'] ){
+		if ( !empty( $options['tss_field_icon_style'] ) && 'custom' === $options['tss_field_icon_style'] ){
 			$additional_icon_color_style .= '.tss-social-div svg{  background-color: '.$options['tss_field_icon_style_bg_color'] .' !important; }';
 		}
 		// Foreground color.
 		$fore_color = '';
-		if( !empty( $options['tss_field_icon_style_foreground'] ) && 'custom' === $options['tss_field_icon_style_foreground'] ){
+		if ( !empty( $options['tss_field_icon_style_foreground'] ) && 'custom' === $options['tss_field_icon_style_foreground'] ){
 			$fore_color = $options['tss_field_icon_style_foreground_color'];
 			$additional_icon_color_style .= '.tss-social-div svg path{  fill:'.$options['tss_field_icon_style_foreground_color'] .' !important; }';
 		}
@@ -86,7 +86,7 @@ class TSS_Social_Share{
 			for( $tss_icon = 0; $tss_icon < count( $tss_social_buttons ); $tss_icon++ ){
 				if ( array_key_exists( 'tss_social_icon_order_'.$tss_icon, $options ) ) {
 					$tss_social_icon = $options[ 'tss_social_icon_order_'. $tss_icon ];
-					if( !empty( $tss_social_buttons[$tss_social_icon] ) ){
+					if ( !empty( $tss_social_buttons[$tss_social_icon] ) ){
 						$share_btn_link = $this->tss_social_share_link( $tss_social_icon );
 						if ( array_key_exists( 'tss_field_share_buttons_'.$tss_social_icon, $options ) && !empty( $share_btn_link ) ) {
 							$img = !empty( $tss_social_buttons[$tss_social_icon]['img'] ) ? $tss_social_buttons[$tss_social_icon]['img'] : esc_attr( $tss_social_buttons[$tss_social_icon]['label'] );
@@ -100,7 +100,7 @@ class TSS_Social_Share{
 			foreach( $tss_social_buttons as $button_slug => $tss_social_button ){
 				$share_btn_link = $this->tss_social_share_link( $button_slug );
 				if ( array_key_exists( 'tss_field_share_buttons_'.$button_slug, $options ) && !empty( $share_btn_link ) ) {
-					$img = !empty( $tss_social_button['img'] ) ? $tss_social_buttons[$tss_social_icon]['img'] : esc_attr( $tss_social_buttons[$tss_social_icon]['label'] );
+					$img = !empty( $tss_social_buttons[$button_slug]['img'] ) ? $tss_social_buttons[$button_slug]['img'] : esc_attr( $tss_social_buttons[$button_slug]['label'] );
 					$html .= '<li data-tss-icon-name="'. esc_attr( $button_slug ) .'"><a '. $share_btn_link.' >' . $img .'</a></li>';
 				}
 			}
@@ -123,7 +123,7 @@ class TSS_Social_Share{
 	public function add_tss_social_icons_placement( $content ){
 		$options = get_option( 'tss_options' );
 		$current_post_type = get_post_type( get_the_ID() );
-		if( in_the_loop() && ( is_singular() || is_page() ) && array_key_exists( 'tss_field_post_types_' . $current_post_type, $options ) ) {
+		if ( in_the_loop() && ( is_singular() || is_page() ) && array_key_exists( 'tss_field_post_types_' . $current_post_type, $options ) ) {
 
 			$tss_options = get_option( 'tss_options' );
 
@@ -131,7 +131,7 @@ class TSS_Social_Share{
 				$tss_icons = $this->build_the_tss_icons();
 				$content   = $tss_icons . $content;
 			}
-			if( array_key_exists( 'tss_field_icon_placement_after_post_content', $tss_options ) ){
+			if ( array_key_exists( 'tss_field_icon_placement_after_post_content', $tss_options ) ){
 				$tss_icons = $this->build_the_tss_icons();
 				$content   = $content . $tss_icons;
 			}
@@ -143,7 +143,7 @@ class TSS_Social_Share{
 	function add_tss_social_icons_inside_featured_image( $html ) {
 		$options = get_option( 'tss_options' );
 		$current_post_type = get_post_type( get_the_ID() );
-		if( ( is_singular() || is_page() )  && array_key_exists( 'tss_field_post_types_' . $current_post_type, $options ) ){
+		if ( ( is_singular() || is_page() )  && array_key_exists( 'tss_field_post_types_' . $current_post_type, $options ) ){
 			if ( array_key_exists( 'tss_field_icon_placement_inside_feature_image', $options ) ) {
 				$post_thumbnail = $html;
 				$html = '<div class="tss-featured-image-overlay">';

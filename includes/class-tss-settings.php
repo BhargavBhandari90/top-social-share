@@ -20,6 +20,11 @@ defined( 'ABSPATH' ) || exit;
 class TSS_Settings{
 
 	/**
+	 *
+	 */
+	private $tss_option;
+
+	/**
 	 * Class constructor
 	 */
 	public function __construct() {
@@ -30,6 +35,8 @@ class TSS_Settings{
 	 * Load settings files.
 	 */
 	public function load(){
+
+		$this->tss_option = get_option( 'tss_options' );
 		/**
 		 * Register tss_options_page to the admin_menu action hook
 		 */
@@ -47,7 +54,6 @@ class TSS_Settings{
 	public function tss_enqueue_admin_script() {
 		// Css rules for Color Picker
 		wp_enqueue_style( 'wp-color-picker' );
-		// wp_enqueue_style( "jquery-ui-sortable" );
 		wp_enqueue_script( 'tss-script-handle', TSS_PLUGINS_URL.'assets/js/scripts.js', array( 'wp-color-picker', 'jquery-ui-sortable' ), false, true );
 		wp_enqueue_style( 'tss-admin-style-handle', TSS_PLUGINS_URL.'assets/css/admin-style.css', array(), TSS_PLUGINS_VERSION );
 	}
@@ -132,8 +138,7 @@ class TSS_Settings{
 	 * Initialize custom option and settings
 	 */
 	public function tss_settings_init() {
-
-		if ( false == get_option( 'tss_options' ) ) {
+		if ( false == $this->tss_option ) {
 			add_option( 'tss_options', apply_filters( 'tss_default_options', $this->tss_default_options() ) );
 		} // end if
 
@@ -233,15 +238,13 @@ class TSS_Settings{
 	 */
 	public function tss_field_post_types_cb( $args ) {
 		// Get the value of the setting we've registered with register_setting()
-		$options = get_option( 'tss_options' );
-		// var_dump($options);
 		$public_post_types = get_post_types( array( "public" => true ) );
 
 
 		foreach ( $public_post_types as $post_type ) {
 
-			if ( array_key_exists( 'tss_field_post_types_' . $post_type, $options ) ) {
-				$is_checked = $options[ 'tss_field_post_types_' . $post_type ];
+			if ( array_key_exists( 'tss_field_post_types_' . $post_type, $this->tss_option ) ) {
+				$is_checked = $this->tss_option[ 'tss_field_post_types_' . $post_type ];
 			} else {
 				$is_checked = '';
 			}
@@ -264,21 +267,20 @@ class TSS_Settings{
 
 		ob_start();
 		echo '<p>Choose the services you want below.  Click a chosen service again to remove.  Reorder services by dragging and dropping as they appear above.</p>';
-		$options = get_option( 'tss_options' );
 		?>
 		<div class="wrap">
 			<small><?php _e( 'Select size for sharing icons', 'social-share-top-tal' ); ?></small>
 			<ul class="sharing-icons-lists" id="tss-social-icon-sortable">
 				<?php
 				$tss_social_buttons = tss_social_sharing_options();
-				if ( array_key_exists( 'tss_social_icon_order_1', $options ) ) {
+				if ( array_key_exists( 'tss_social_icon_order_1', $this->tss_option ) ) {
 					// load reorderd options
 					for( $tss_icon = 0; $tss_icon <= count( $tss_social_buttons ); $tss_icon++ ){
-						if ( array_key_exists( 'tss_social_icon_order_'.$tss_icon, $options ) ) {
-							$tss_social_icon = $options[ 'tss_social_icon_order_'. $tss_icon ];
+						if ( array_key_exists( 'tss_social_icon_order_'.$tss_icon, $this->tss_option ) ) {
+							$tss_social_icon = $this->tss_option[ 'tss_social_icon_order_'. $tss_icon ];
 							if( !empty( $tss_social_buttons[$tss_social_icon] ) ){
 								$img = !empty( $tss_social_buttons[$tss_social_icon]['img_url'] ) ? '<img src="'. esc_url( $tss_social_buttons[$tss_social_icon]['img_url'] ).'" width="24px" height="24px" style="background-color:'. esc_attr( $tss_social_buttons[$tss_social_icon]['bgcolor'] ) .'" />' : '';
-								echo '<li data-tss-icon-name="'. esc_attr( $tss_social_icon ) .'"><label><input type="checkbox" name="tss_options[tss_field_share_buttons_'. esc_attr( $tss_social_icon ) .']" ' . checked( $options[ 'tss_field_share_buttons_' . $tss_social_icon ], 1, false ) . ' value="1"> ' . $img . esc_attr( $tss_social_buttons[$tss_social_icon]['label'] ).'</label></li>';
+								echo '<li data-tss-icon-name="'. esc_attr( $tss_social_icon ) .'"><label><input type="checkbox" name="tss_options[tss_field_share_buttons_'. esc_attr( $tss_social_icon ) .']" ' . checked( $this->tss_option[ 'tss_field_share_buttons_' . $tss_social_icon ], 1, false ) . ' value="1"> ' . $img . esc_attr( $tss_social_buttons[$tss_social_icon]['label'] ).'</label></li>';
 							}
 						}
 					}
@@ -286,15 +288,15 @@ class TSS_Settings{
 					// load default options
 					foreach( $tss_social_buttons as $button_slug => $tss_social_button ){
 						$img = !empty( $tss_social_button['img_url'] ) ? '<img src="'. esc_url( $tss_social_button['img_url'] ).'" width="24px" height="24px" style="background-color:'. esc_attr( $tss_social_button['bgcolor'] ) .'" />' : '';
-						echo '<li data-tss-icon-name="'. esc_attr( $button_slug ) .'"><label><input type="checkbox" name="tss_options[tss_field_share_buttons_'. esc_attr( $button_slug ) .']"  ' . checked( $options[ 'tss_field_share_buttons_' . $button_slug ], 1, false ) . ' value="1"> ' . $img . esc_attr( $tss_social_button['label'] ).'</label></li>';
+						echo '<li data-tss-icon-name="'. esc_attr( $button_slug ) .'"><label><input type="checkbox" name="tss_options[tss_field_share_buttons_'. esc_attr( $button_slug ) .']"  ' . checked( $this->tss_option[ 'tss_field_share_buttons_' . $button_slug ], 1, false ) . ' value="1"> ' . $img . esc_attr( $tss_social_button['label'] ).'</label></li>';
 					}
 				}
 				?>
 			</ul>
 			<?php
 			for( $tss_icon = 0; $tss_icon <= count( $tss_social_buttons ); $tss_icon++ ){
-				if ( array_key_exists( 'tss_social_icon_order_'.$tss_icon, $options ) ) {
-					echo '<input class="tss_hidden_options" name="tss_options[tss_social_icon_order_' . $tss_icon . ']" type="hidden" value="'. $options[ 'tss_social_icon_order_'. $tss_icon ] .'">';
+				if ( array_key_exists( 'tss_social_icon_order_'.$tss_icon, $this->tss_option ) ) {
+					echo '<input class="tss_hidden_options" name="tss_options[tss_social_icon_order_' . $tss_icon . ']" type="hidden" value="'. $this->tss_option[ 'tss_social_icon_order_'. $tss_icon ] .'">';
 				}
 			}
 			?>
@@ -309,10 +311,9 @@ class TSS_Settings{
 		<div class="wrap">
 			<small><?php _e( 'Select size for sharing icons', 'social-share-top-tal' ); ?></small>
 			<?php
-			$options = get_option( 'tss_options' );
 
-			if ( array_key_exists( 'tss_field_icon_size', $options ) ) {
-				$is_checked = $options['tss_field_icon_size'];
+			if ( array_key_exists( 'tss_field_icon_size', $this->tss_option ) ) {
+				$is_checked = $this->tss_option['tss_field_icon_size'];
 			} else {
 				$is_checked = '';
 			}
@@ -347,14 +348,13 @@ class TSS_Settings{
 
 	public function tss_field_icon_style_cb( $args ){
 		ob_start();
-		$options = get_option( 'tss_options' );
-		if ( array_key_exists( 'tss_field_icon_style', $options ) ) {
-			$tss_field_icon_style = $options['tss_field_icon_style'];
+		if ( array_key_exists( 'tss_field_icon_style', $this->tss_option ) ) {
+			$tss_field_icon_style = $this->tss_option['tss_field_icon_style'];
 		} else {
 			$tss_field_icon_style = '';
 		}
-		if ( array_key_exists( 'tss_field_icon_style_foreground', $options ) ) {
-			$tss_field_icon_foreground_style = $options['tss_field_icon_style_foreground'];
+		if ( array_key_exists( 'tss_field_icon_style_foreground', $this->tss_option ) ) {
+			$tss_field_icon_foreground_style = $this->tss_option['tss_field_icon_style_foreground'];
 		} else {
 			$tss_field_icon_foreground_style = '';
 		}
@@ -370,7 +370,7 @@ class TSS_Settings{
 						</select>
 						background
 					</label>
-					<div class="color-field-container"><input name="tss_options[<?= esc_attr( $args['label_for'] ).'_bg_color'; ?>]" class="color-field" type="text" value="<?php echo ! empty( $options['tss_field_icon_style_bg_color'] ) ? esc_attr( $options['tss_field_icon_style_bg_color'] ) : '#2a2a2a'; ?>" data-default-color="#2a2a2a"></div>
+					<div class="color-field-container"><input name="tss_options[<?= esc_attr( $args['label_for'] ).'_bg_color'; ?>]" class="color-field" type="text" value="<?php echo ! empty( $this->tss_option['tss_field_icon_style_bg_color'] ) ? esc_attr( $this->tss_option['tss_field_icon_style_bg_color'] ) : '#2a2a2a'; ?>" data-default-color="#2a2a2a"></div>
 				</li>
 				<li>
 					<label>
@@ -380,7 +380,7 @@ class TSS_Settings{
 						</select>
 						foreground
 					</label>
-					<div class="color-field-container"><input name="tss_options[<?= esc_attr( $args['label_for'] ).'_foreground_color'; ?>]" class="color-field" type="text" value="<?php echo ! empty( $options['tss_field_icon_style_foreground_color'] ) ? esc_attr( $options['tss_field_icon_style_foreground_color'] ) : '#ffffff'; ?>" data-default-color="#ffffff"></div>
+					<div class="color-field-container"><input name="tss_options[<?= esc_attr( $args['label_for'] ).'_foreground_color'; ?>]" class="color-field" type="text" value="<?php echo ! empty( $this->tss_option['tss_field_icon_style_foreground_color'] ) ? esc_attr( $this->tss_option['tss_field_icon_style_foreground_color'] ) : '#ffffff'; ?>" data-default-color="#ffffff"></div>
 				</li>
 			</ul>
 		</div>
@@ -394,28 +394,27 @@ class TSS_Settings{
 		<div class="wrap">
 			<small><?php _e( 'Select size for sharing icons', 'social-share-top-tal' ); ?></small>
 			<?php
-			$options = get_option( 'tss_options' );
 
-			if ( array_key_exists( 'tss_field_icon_placement_below_post_title', $options ) ) {
-				$below_post_title = $options['tss_field_icon_placement_below_post_title'];
+			if ( array_key_exists( 'tss_field_icon_placement_below_post_title', $this->tss_option ) ) {
+				$below_post_title = $this->tss_option['tss_field_icon_placement_below_post_title'];
 			} else {
 				$below_post_title = '';
 			}
 
-			if ( array_key_exists( 'tss_field_icon_placement_floating_left', $options ) ) {
-				$floating_left = $options['tss_field_icon_placement_floating_left'];
+			if ( array_key_exists( 'tss_field_icon_placement_floating_left', $this->tss_option ) ) {
+				$floating_left = $this->tss_option['tss_field_icon_placement_floating_left'];
 			} else {
 				$floating_left = '';
 			}
 
-			if ( array_key_exists( 'tss_field_icon_placement_after_post_content', $options ) ) {
-				$after_post_content = $options['tss_field_icon_placement_after_post_content'];
+			if ( array_key_exists( 'tss_field_icon_placement_after_post_content', $this->tss_option ) ) {
+				$after_post_content = $this->tss_option['tss_field_icon_placement_after_post_content'];
 			} else {
 				$after_post_content = '';
 			}
 
-			if ( array_key_exists( 'tss_field_icon_placement_inside_feature_image', $options ) ) {
-				$inside_feature_image = $options['tss_field_icon_placement_inside_feature_image'];
+			if ( array_key_exists( 'tss_field_icon_placement_inside_feature_image', $this->tss_option ) ) {
+				$inside_feature_image = $this->tss_option['tss_field_icon_placement_inside_feature_image'];
 			} else {
 				$inside_feature_image = '';
 			}
