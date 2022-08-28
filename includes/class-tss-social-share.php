@@ -157,7 +157,8 @@ class TSS_Social_Share{
 	 */
 	function add_tss_social_icons_inside_featured_image( $html ) {
 		$current_post_type = get_post_type( get_the_ID() );
-		if ( ( is_singular() || is_page() )  && array_key_exists( 'tss_field_post_types_' . $current_post_type, $this->tss_option ) ){
+		// only add when featured image exist.
+		if ( ( is_singular() || is_page() )  && array_key_exists( 'tss_field_post_types_' . $current_post_type, $this->tss_option ) && has_post_thumbnail() ){
 			if ( array_key_exists( 'tss_field_icon_placement_inside_feature_image', $this->tss_option ) ) {
 				$post_thumbnail = $html;
 				$html = '<div class="tss-featured-image-overlay">';
