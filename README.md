@@ -1,7 +1,4 @@
 # Top Social Share #
-Social share WordPress Plugin.
-
-### Welcome to the Top Social Share GitHub Repository
 
 This WordPress Plugin will automatically display selected social network(s) sharing buttons in posts and/or on pages.
 Support for the following social networks is available: Facebook, Twitter, Pinterest, LinkedIn, Whatsapp. The Whatsapp link should show only on mobile devices.
@@ -22,3 +19,4 @@ Support for the following social networks is available: Facebook, Twitter, Pinte
 *  The plugin should also enable a shortcode to include the sharing bar inside a post content
 
 # Demo #
+<video src='https://www.loom.com/share/1b785731eb78432780754563f62cc3d0' width=180/>
