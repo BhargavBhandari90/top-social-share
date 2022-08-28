@@ -46,11 +46,12 @@ if ( ! defined( 'TSS_PLUGINS_VERSION' ) ) {
 if( !function_exists( 'tss_plugin_activate' ) ){
 	function tss_plugin_activate() {
 		// include all required files here.
-		if ( is_admin() ){
+		if ( is_admin() ){ // only load setting file when it is admin panel.
 			require_once( TSS_PLUGINS_PATH . 'includes/class-tss-settings.php' );
-		} else{
+		} else{ // If it is not admin panel load this file to display social share buttons.
 			require_once( TSS_PLUGINS_PATH . 'includes/class-tss-social-share.php' );
 		}
+		// Load all common functions.
 		require_once( TSS_PLUGINS_PATH . 'includes/functions.php' );
 	}
 	add_action( 'plugins_loaded', 'tss_plugin_activate' );
