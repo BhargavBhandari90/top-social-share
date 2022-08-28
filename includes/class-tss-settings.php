@@ -274,7 +274,7 @@ class TSS_Settings{
 		echo '<p>Choose the services you want below.  Click a chosen service again to remove.  Reorder services by dragging and dropping as they appear above.</p>';
 		?>
 		<div class="wrap">
-			<small><?php _e( 'Select size for sharing icons', 'social-share-top-tal' ); ?></small>
+			<small><?php _e( 'Enable sharing icons and reorder them here. WhatsApp icon only appear on mobile.', 'social-share-top-tal' ); ?></small>
 			<ul class="sharing-icons-lists" id="tss-social-icon-sortable">
 				<?php
 				$tss_social_buttons = tss_social_sharing_options();
@@ -375,7 +375,7 @@ class TSS_Settings{
 		}
 		?>
 		<div class="wrap tss-style-container">
-			<small><?php _e( 'Select size for sharing icons', 'social-share-top-tal' ); ?></small>
+			<small><?php _e( 'Select custom color style for sharing icons', 'social-share-top-tal' ); ?></small>
 			<ul>
 				<li>
 					<label>
@@ -412,7 +412,7 @@ class TSS_Settings{
 		ob_start();
 		?>
 		<div class="wrap">
-			<small><?php _e( 'Select size for sharing icons', 'social-share-top-tal' ); ?></small>
+			<small><?php _e( 'Select placement for the sharing icons', 'social-share-top-tal' ); ?></small>
 			<?php
 
 			if ( array_key_exists( 'tss_field_icon_placement_below_post_title', $this->tss_option ) ) {

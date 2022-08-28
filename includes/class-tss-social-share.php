@@ -98,7 +98,7 @@ class TSS_Social_Share{
 						$share_btn_link = $this->tss_social_share_link( $tss_social_icon );
 						if ( array_key_exists( 'tss_field_share_buttons_'.$tss_social_icon, $this->tss_option ) && !empty( $share_btn_link ) ) {
 							$img = !empty( $tss_social_buttons[$tss_social_icon]['img'] ) ? $tss_social_buttons[$tss_social_icon]['img'] : esc_attr( $tss_social_buttons[$tss_social_icon]['label'] );
-							$html .= '<li data-tss-icon-name="'. esc_attr( $tss_social_icon ) .'" class="' . $tss_size_option . '"><a '. $share_btn_link.' >' . $img .'</a></li>';
+							$html .= '<li data-tss-icon-name="'. esc_attr( $tss_social_icon ) .'" class="' . $tss_size_option . '"><a '. $share_btn_link.' title="'. esc_attr( $tss_social_buttons[$tss_social_icon]['label'] ) .'">' . $img .'</a></li>';
 						}
 					}
 				}
@@ -109,7 +109,7 @@ class TSS_Social_Share{
 				$share_btn_link = $this->tss_social_share_link( $button_slug );
 				if ( array_key_exists( 'tss_field_share_buttons_'.$button_slug, $this->tss_option ) && !empty( $share_btn_link ) ) {
 					$img = !empty( $tss_social_buttons[$button_slug]['img'] ) ? $tss_social_buttons[$button_slug]['img'] : esc_attr( $tss_social_buttons[$button_slug]['label'] );
-					$html .= '<li data-tss-icon-name="'. esc_attr( $button_slug ) .'"><a '. $share_btn_link.' >' . $img .'</a></li>';
+					$html .= '<li data-tss-icon-name="'. esc_attr( $button_slug ) .'"><a '. $share_btn_link.' title="'. esc_attr( $tss_social_buttons[$button_slug]['label'] ) .'">' . $img .'</a></li>';
 				}
 			}
 		}
@@ -178,9 +178,9 @@ class TSS_Social_Share{
 
 		global $post;
 		$post_permalink = get_permalink( $post->ID );
-		$post_title = $post->ID;
+		$post_title = !empty( $post->post_title ) ? $post->post_title : '';
 		$post_attachment_url = wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) );
-		$link = '#';
+		$link = ''; // if link is empty, the social icon will not appear ( specially for whatsapp icon).
 		switch ( $option ) {
 
 			case 'facebook':
