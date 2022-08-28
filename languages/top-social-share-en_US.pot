@@ -1,0 +1,77 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Top Social Share 1.0.0\n"
+"POT-Creation-Date: 2022-08-28 11:56+0530\n"
+"PO-Revision-Date: 2022-08-28 12:07+0530\n"
+"Last-Translator: \n"
+"Language-Team: 1naveengiri@gmail.com\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-tss-settings.php:71
+msgid "Top Social Sharing Plugin"
+msgstr ""
+
+#: includes/class-tss-settings.php:72
+msgid "Social Sharing"
+msgstr ""
+
+#: includes/class-tss-settings.php:93
+msgid "Settings Saved"
+msgstr ""
+
+#: includes/class-tss-settings.php:155
+msgid "Settings"
+msgstr ""
+
+#: includes/class-tss-settings.php:162
+msgid "Post Types"
+msgstr ""
+
+#: includes/class-tss-settings.php:175
+msgid "Share Buttons"
+msgstr ""
+
+#: includes/class-tss-settings.php:188
+msgid "Sharing Icons Size"
+msgstr ""
+
+#: includes/class-tss-settings.php:201
+msgid "Sharing Icons Style"
+msgstr ""
+
+#: includes/class-tss-settings.php:214
+msgid "Sharing Icons Placement"
+msgstr ""
+
+#: includes/class-tss-settings.php:233
+msgid ""
+"Top Social share plugin also provide a shortcode to embed the social sharing "
+"buttons in your website content, you can use the <code>[top-share]</code>, "
+"and the butttons will appear."
+msgstr ""
+
+#: includes/class-tss-settings.php:277
+msgid ""
+"Enable sharing icons and reorder them here. WhatsApp icon only appear on "
+"mobile."
+msgstr ""
+
+#: includes/class-tss-settings.php:322
+msgid "Select size for sharing icons"
+msgstr ""
+
+#: includes/class-tss-settings.php:378
+msgid "Select custom color style for sharing icons"
+msgstr ""
+
+#: includes/class-tss-settings.php:415
+msgid "Select placement for the sharing icons"
+msgstr ""
